@@ -18,7 +18,7 @@ namespace RegExAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("{regExQuery}")]
         [ProducesResponseType(typeof(RegExResponse), 200)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]

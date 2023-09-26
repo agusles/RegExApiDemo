@@ -6,6 +6,6 @@ public record RegExResponse
     public int Count { get; set; }
     public int Total { get; set; }
     public int Percentage { get; set; }
-    public IList<RegExMatchInfo> Entries { get; set; }
     public double TimeElapsed { get; internal set; }
+    public IList<RegExMatchInfo> Entries { get; set; }
 }
