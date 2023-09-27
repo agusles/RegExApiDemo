@@ -8,7 +8,7 @@ Endpoint is configurable on appsettings.json:
     "Url": "https://jsonplaceholder.typicode.com/posts"
   }
 ```
-The response data contains information on how many records matches the expression, the percentage, time elapsed (in millisecconds) and a list of the matching results along with the index of the first occurence of the pattern.
+The response data contains information on how many records matches the expression, the percentage, time elapsed (in milliseconds) and a list of the matching results along with the index of the first occurence of the pattern.
 ```
 {
   "regExQuery": "occa",
@@ -63,4 +63,5 @@ contains service implementations:
 Contains the external interface with the application. In this scenario it's just an API
 - Single API endpoint for querying regular expressions
 - Services are configured and injected using Extensions (AddServicesExtensions)
-- A aimple middleware exception handling layer has been added for generic handling of exceptions
+- A simple middleware exception handling layer has been added for generic handling of exceptions
+- Swagger UI added for easy testing
