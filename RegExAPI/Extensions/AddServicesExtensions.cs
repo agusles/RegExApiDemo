@@ -2,26 +2,33 @@
 using RegExAPI.Domain.Models;
 using RegExAPI.Infrastructure.Services;
 
-namespace RegExAPI.Extensions
+namespace RegExAPI.Extensions;
+
+public static class AddServicesExtensions
 {
-    public static class AddServicesExtensions
+    public static IServiceCollection AddApplicationConfig(
+        this IServiceCollection services, IConfiguration config)
     {
-        public static IServiceCollection AddApplicationConfig(
-            this IServiceCollection services, IConfiguration config)
-        {
-            services.Configure<JsonServiceOptions>(
-                config.GetSection(JsonServiceOptions.Position));
+        services.Configure<JsonServiceOptions>(
+            config.GetSection(JsonServiceOptions.Position));
 
-            return services;
-        }
+        return services;
+    }
 
-        public static IServiceCollection AddApplicationServices(
-             this IServiceCollection services)
-        {
-            services.AddScoped<IJsonClient, JsonPlaceholderClient>();
-            services.AddScoped<IRegExService, RegExService>();
+    public static IServiceCollection AddApplicationHttpClient(
+        this IServiceCollection services)
+    {
+        services.AddHttpClient<JsonPlaceholderClient>();
 
-            return services;
-        }
+        return services;
+    }
+
+    public static IServiceCollection AddApplicationServices(
+         this IServiceCollection services)
+    {
+        services.AddScoped<IJsonClient, JsonPlaceholderClient>();
+        services.AddScoped<IRegExService, RegExService>();
+
+        return services;
     }
 }

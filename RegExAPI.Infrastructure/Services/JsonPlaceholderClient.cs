@@ -2,23 +2,20 @@
 using RegExAPI.Domain.Contracts;
 using RegExAPI.Domain.Entities;
 using RegExAPI.Domain.Models;
-using RestSharp;
+using System.Net.Http.Json;
 
-namespace RegExAPI.Infrastructure.Services
+namespace RegExAPI.Infrastructure.Services;
+
+public class JsonPlaceholderClient : IJsonClient
 {
-    public class JsonPlaceholderClient : IJsonClient
+    private readonly HttpClient client;
+
+    public JsonPlaceholderClient(HttpClient httpClient, IOptions<JsonServiceOptions> options)
     {
-        readonly RestClient restClient;
-        public string BaseURL { get; set; } = "https://jsonplaceholder.typicode.com/posts";
-
-        public JsonPlaceholderClient(IOptions<JsonServiceOptions> options)
-        {
-            restClient = new RestClient(options.Value.Url);
-        }
-
-        public async Task<IList<ReadEntry>> GetEntries()
-        {
-            return await restClient.GetAsync<List<ReadEntry>>(new RestRequest());
-        }
+        client = httpClient;
+        client.BaseAddress = new Uri(options.Value.Url);
     }
+
+    public async Task<IList<ReadEntry>> GetEntries()
+        => await client.GetFromJsonAsync<List<ReadEntry>>(string.Empty);
 }

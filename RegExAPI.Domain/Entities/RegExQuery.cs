@@ -5,7 +5,6 @@ namespace RegExAPI.Domain.Entities;
 
 public record RegExQuery: IRequest<RegExResponse>
 {
-    
     public RegExQuery(string queryString)
     {
         this.QueryString = queryString;

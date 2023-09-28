@@ -9,6 +9,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add HttpClient
+builder.Services
+    .AddApplicationHttpClient();
+
 // Add application services
 builder.Services
     .AddApplicationConfig(builder.Configuration)
