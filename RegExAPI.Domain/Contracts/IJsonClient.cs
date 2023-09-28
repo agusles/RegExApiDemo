@@ -4,5 +4,5 @@ namespace RegExAPI.Domain.Contracts;
 
 public interface IJsonClient
 {
-    Task<IList<ReadEntry>> GetEntries();
+    Task<IList<ReadEntry>> GetEntries(CancellationToken cancellationToken);
 }

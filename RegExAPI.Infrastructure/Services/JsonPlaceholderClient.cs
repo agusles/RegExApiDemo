@@ -16,6 +16,6 @@ public class JsonPlaceholderClient : IJsonClient
         client.BaseAddress = new Uri(options.Value.Url);
     }
 
-    public async Task<IList<ReadEntry>> GetEntries()
-        => await client.GetFromJsonAsync<List<ReadEntry>>(string.Empty);
+    public async Task<IList<ReadEntry>> GetEntries(CancellationToken cancellationToken)
+        => await client.GetFromJsonAsync<List<ReadEntry>>(string.Empty, cancellationToken);
 }

@@ -45,7 +45,7 @@ public class RegExHandlerTests
             new RegExMatchInfo { Id = 2, Title = "Test entry 2", ExpressionIndex = 0 }
         };
 
-        _jsonClientMock.Setup(client => client.GetEntries()).ReturnsAsync(jsonEntries);
+        _jsonClientMock.Setup(client => client.GetEntries(cancellationToken)).ReturnsAsync(jsonEntries);
         _regExServiceMock.Setup(service => service.GetMatchingEntries(jsonEntries, request)).Returns(regexEntries);
 
         // Act

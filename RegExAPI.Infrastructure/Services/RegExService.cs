@@ -17,12 +17,12 @@ public class RegExService : IRegExService
     public IList<RegExMatchInfo> GetMatchingEntries(IList<ReadEntry> entries, RegExQuery query)
     {
         var regExResult = entries
-            .Select(entry => new { Entry = entry, Match = Regex.Match(entry.Title, query.QueryString)} )
+            .Select(entry => new { Entry = entry, Match = Regex.Match(entry.Title, query.QueryString) })
             .Where(regEx => regEx.Match.Success);
 
         return regExResult
             .Select(regEx => new RegExMatchInfo
-            { 
+            {
                 ExpressionIndex = regEx.Match.Index,
                 Id = regEx.Entry.Id,
                 Title = regEx.Entry.Title,

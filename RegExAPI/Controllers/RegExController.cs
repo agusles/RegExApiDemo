@@ -19,14 +19,16 @@ namespace RegExAPI.Controllers
         }
 
         [HttpGet("{regExQuery}")]
-        [ProducesResponseType(typeof(RegExResponse), 200)]
+        [ProducesResponseType(typeof(RegExResponse), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> GetEntries(string regExQuery)
+        public async Task<ActionResult<RegExResponse>> GetEntries(string regExQuery, CancellationToken cancellationToken)
         {
             var query = new RegExQuery(regExQuery);
-            var response = await _mediatr.Send(query);
-            return Ok(response);
+            var response = await _mediatr.Send(query, cancellationToken);
+            return (response.Count == 0) 
+                ? NotFound()
+                : Ok(response);
         }
     }
 }
